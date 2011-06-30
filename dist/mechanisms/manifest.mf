@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.7.1
+Created-By: 19.0-b09 (Sun Microsystems Inc.)
+Implementation-Title: CraftBook (mechanisms)
+Implementation-Version: nightly
+CraftBook-Version: nightly
+Class-Path: CraftBook.jar WorldEdit.jar ../WorldEdit.jar
+

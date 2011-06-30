@@ -1,0 +1,307 @@
+3.0alpha2:
+- New stuff was added. Not sure what...
+- ICs are implemented, but not all yet. Here's a summary of what is available:
+    MC9999: ResurrectDumbledore
+    MC1000: Repeater
+    MC1001: Inverter
+    MC1017: ToggleFlipFlop
+    MC1018: ToggleFlipFlop
+    MC1020: RandomBit
+    MC1025: ServerTimeModulus
+    MC1110: WirelessTransmitter
+    MC1111: WirelessReceiver
+    MC1200: CreatureSpawner
+    MC1201: ItemDispenser
+    MC1230: DaySensor
+    MC1231: TimeControl
+    MC1260: WaterSensor
+    MC1261: LavaSensor
+    MC1262: LightSensor
+    MC1510: MessageSender
+    MC3002: AndGate
+    MC3003: NandGate
+    MC3020: XorGate
+    MC3021: XnorGate
+    MC3030: RsNorFlipFlop
+    MC3031: InvertedRsNandLatch
+    MC3032: JkFlipFlop
+    MC3033: RsNandLatch
+    MC3034: EdgeTriggerDFlipFlop
+    MC3036: LevelTriggeredDFlipFlop
+    MC3040: Multiplexer
+    MC3101: DownCounter
+Some of those require the craftbook.ic.safe permissions, while others
+require craftbook.ic.restricted (mob spawner, etc.).
+- Now all features require permissions. Use craftbook.mech.*
+
+3.0-alpha1:
+- FOR BUKKIT! About 50% completed!
+
+2.0preview11:
+- Added MC1260/MC0260 (water sensor), MC1261/MC0261 (lava sensor),
+    MC1262/MC0262 (light sensor).
+- Added [DGate], a gate sign with a very small search radius (best
+    used with redstone).
+
+2.0preview10:
+- Added the ability to sort minecarts based on their type with the
+    minecart sort block. Use "Storage", "Powered", or "Minecart".
+- Added extra error catching for the chunk finder.
+- Fixed NearbyChestBlockBag not supporting double chests.
+- Fixed ConcurrentModificationException in ChunkFinder.
+
+2.0preview9:
+- Fixed self-triggered ICs not loading reliably on server/chunk load and
+    plugin reload.
+
+2.0preview8:
+[Toggleable areas]
+- Toggleable areas have been overhauled. Now they are saved per-user and
+    no other user can toggle another user's areas (without permission).
+    Existing area files will have to be moved to
+    world/craftbook/copyareas/global
+    and have ".cbcopy" be appended to their filenames. These areas will
+    be in the global namespace.
+- New [Area] sign replaces [Toggle] sign. This new sign has namespace
+    support (3rd line). Leave blank to set it as the namespace for your
+    own player or use "@" for the global namespace (if you have permission).
+    The fourth line indicates the other state to switch to when the
+    area is turned off (best used with redstone) -- use "-" to indicate
+    the action of doing nothing and leave blank to clear (default behavior).
+- Toggle area signs can now be triggered with redstone.
+- Fixed toggle areas dropping items.
+- Fixed packet spam caused by toggling areas.
+[Redstone]
+- Added 2-tick propagation delay to ICs and redstone-powered mechanisms.
+    Removes old recursion limit method of infinite loop prevention.
+- Added redstone netherstone (disabled by default). This allows you to
+    toggle fire with redstone.
+- All redstone devices can now take redstone current input on a level
+    above the actual device, allowing you to wire pumpkins from
+    above, for example (note: you still should not put wires on top of
+    pumpkins as they will be removed by Minecraft).
+[ICs]
+- New 3I3O family with 3 inputs and 3 outputs.
+- Added MC3040 (multiplexer), MC4000 (full adder), MC4010 (half adder),
+    MC4100 (full subtractor), MC4110 (half subtractor),
+    MC3032 (JK negative edge-triggered flip flop), MC3101 (down counter),
+    MC4200 (dispatcher), MC1202 (chest dispenser),
+    MC0020 (self-triggering random bit),
+    MC0111 (self-triggering reciever), MC0230 (self-triggering day check),
+    MC1240 (arrow shooter), MC1241 (arrow barrage), and
+    MC0420 (self-triggering clock).
+- New MC3033 (RS NAND latch) replaces defunct MC3031.
+- MC1200 (mob spawner) now supports riders. Specify the rider on the
+    fourth line.
+- Changed MC1110 to output the input.
+- Allowed the set block ICs to displace a block ("force" must be the
+    fourth line). 
+- Blocked the dispensing/creation of pre-Alpha cloth blocks with ICs.
+- Added support for self-triggering ICs. No more clocks on recievers!
+- Added MC5001, a variant of MC5000 using the 3 input, 3 output layout.
+- Added support for custom ICs using existing PLC languages.
+- Added new redstone-plcs-require-permission configuration.
+- Added /listics command.
+- Added Perlstone32 PLC language.
+- Fixed issue with the 32nd slot of Perlstone's tables.
+- Fixed chest dispenser IC being able to dispense -1 of an item.
+- Added Perlstone32 PLC language.
+[Block bags]
+- Overhauled block bag system for bridges, gates, etc. Now multiple
+    block bags can be used simultaneously.
+- New administrator-only sign-based infinite block bags.
+- Fixed issue with item duplication with the nearby-chests block bag
+    (this may be obsolete with Minecraft beta).
+- The nearby-chests block bag should no longer break between Minecraft
+    updates, pending update of hMod.
+- Removed the requirement of the nearby chest block bag needing one item in
+    the chest to begin with.
+[Minecarts]
+- Added minecart sort control block. This allows you to switch track 
+    direction based on criteria (such as whether the cart is empty, if
+    the passenger is of a certain hMod group, if the passenger is holding
+    a certain item, etc.). It is currently not possible to filter by
+    mob type inside the minecart.
+- Minecart station blocks now continually push when activated. To pulse
+    (old behavior), put "Pulse" on the third or fourth line.
+- The minecart dispenser can now dispense onto anything.
+- Minecart dispensers will now collect the contents of storage minecarts
+    and store them.
+- Minecart dispensers can now dispense other types of minecarts by
+    specifying "Storage" or "Powered" on the 3rd line. If a type is
+    specified, minecarts of that type will also be stored (instead of
+    breaking apart minecarts into their respective craftable pieces).
+- Minecart dispensers will now push dispensed minecarts if Push is on the
+    fourth line of the sign.
+- The minecart trigger block has been dropped.
+- A new deposit minecart block can deposit a storage minecart's contents
+    into adjacent chests or deposit the contents of chests into a storage
+    minecart automatically.
+- Redstone currents can now be put on the same level as the tracks
+    for minecart control blocks.
+- Added an empty minecart delay that will remove empty minecarts after
+    left unoccupied by players for a certain amount of time.
+- Added an option to destroy minecarts on exit of them.
+- Fixed the minecart dispenser not collecting carts that were on a slope.
+- Fixed issue where minecarts significantly slowed down on pressure plates.
+- Fixed minecart ejector blocks so they should now more accurately
+    eject players now so that they won't fall through.
+- Fixed issue with station blocks not working well if the sign was only
+    one block underneath the station block.
+- Fixed an issue where changing the station block type to something other
+    than obsidian did not work correctly.
+[Cauldrons]
+- Added per-group permissions for cauldrons.
+- Added reload-cauldron console command. 
+- If the cauldron recipes file is missing, the current working directory
+    will now be printed.
+- Fixed potential issue with the cauldron dropping items.
+[Mechanisms]
+- Bridges can now cut through snow.
+- New doors are a vertical form of bridges. Use [Door Up] and [Door Down]
+    and [Door End]. They work like bridge signs, although you have to
+    specify a direction that the door is in (unlike bridges).
+- New hidden redstone switches. Put a sign with [X] as the second line next
+    to a block (either next to it, on top, or below) and then put switches
+    right next to the sign at right angles. While holding no item, right
+    click the block to toggle the switch(es).
+[Misc]
+- New /reload CraftBook command reloads CraftBook's configuration. /reload *
+    can be used to reload other plugins (utilizing the same system)
+    in addition to hMod as well.
+- Version detection should now be more accurate, working even if you reload
+    the plugin.
+- Various messages were added during feature setup (such as bridge setup)
+    in order to guide players. This may be too noisy so it may be removed
+    or at least toned down in the future.
+- Fixed issue where the elevator could drop players into a deadly fall
+    or put players inside blocks. Now the player is simply not teleported
+    and is informed instead.
+
+1.4:
+- Added MC5000, a programmable logic chip utilizing the PerlStone
+    language. Contributed by Lymia.
+- Gates can now displace lava in addition to water.
+- Minecarts can now be controlled by hitting the cart from within it.
+- Added a minecart message control block that will print a message to a
+    player's chat when s/he passes over the block in a minecart.
+- Added minecart ejection control block to eject the player.
+- Added reverse and directed reverse minecart control blocks.
+- New minecart dispensers that will pick up minecarts that hit it (a chest)
+    and will dispense carts when given a redstone current.
+- Added configuration options to change the minecart control block types.
+- Replaced the minecart coast factor with a function to hinder the
+    gradual slow down of unoccupied minecarts.
+- New experimental minecart trigger block that toggles switches on
+    the side of the block (doesn't work too swell yet).
+- Pressure plates should now no longer bring minecarts to a dead stop.
+- Station signs can now be only one block below the station block.
+- Minecart station blocks now give a slightly stronger boost.
+- MC1200 now spawns mobs in the first free block above the block behind
+    the IC sign.
+- MC1201 now spawn mobs above the block behind the IC sign.
+- Added MC1025 that places a block two blocks above the block
+    behind the IC sign.
+- Added MC1026 that places a block two blocks below the block
+    behind the IC sign.
+
+1.3.1:
+- Fixed bug with MC1201.
+
+1.3:
+- Added MC3020 (2-input XOR gate), MC3002 (3-input AND),
+    MC3003 (3-input NAND), MC3021 (2-input XNOR), MC3030 (RS NOR latch),
+    MC3031 (RS NAND latch), MC3034 (D rising edge-triggered flip flop),
+    MC3035 (D level-triggered flip flop), MC3231 (time control),
+    MC1201 (dispenser).
+- Minecart booster and station blocks added. They were accidentally added
+    by 1.2.1 got out, so many of you have already been running it. I didn't
+    mean to have them get into the main CraftBook branch yet -- but they
+    have. Gold blocks underneath a track give a 2x boost, gold ore gives
+    25% boost, slow sand gives a 50% slow down, and gravel gives a
+    20% slow down. Station blocks are made of obsidian -- wire them
+    and have a low input to stop all carts that pass over. Put a sign
+    two blocks below facing the direction that you want to go and
+    give a high input to have the cart pushed in the sign's direction
+    (no diagonals!).
+- Improved redstone triggering so that redstone devices to the right/left
+    and above of an input block but have nothing under them will not prevent
+    trigerring.
+- Fixed for the MC update.
+
+1.2.1:
+- Added a recursion limit to the redstone processing.
+- Increased the height that mobs spawned at with MC1200 by one block up.
+
+1.2:
+- Water and lava can now be used reliably as ingredients. Specify
+    moving water/lava, not the stationary water/lava.
+- Rewrote redstone triggering for bridges and gates. They will now not
+    trigger by redstone as easily -- they now act more like doors and
+    other redstone components in that the wire must run up to the sign
+    and not just merely pass by it. Note that you can also run wires
+    directly underneath the sign and that will work.
+- Added redstone integrated circuits. They compact complicated and
+    otherwise impossible components into very small functional blocks.
+- Pumpkin redstone input triggering has been expanded so that you can lead
+    wires up to it instead of only under it. Note that you should not
+    put redstone components above pumpkins as pumpkins tend to 'eat' the
+    redstone items.
+- CraftBook now has conditional hook registration so that it will not
+    completely fail if a feature of hMod is not available for
+    whatever reason.
+- New ammeter (coal) can be right clicked on redstone components to get
+    their current level.
+- Bridges can now cut through water, allowing you to make flat flood gates
+    in addition to vertical flood gates (with the gate feature). This also
+    applies to lava so that you can make lava flood gates.
+- Fixed the /elevator permission not working, added /togglearea
+    and /bridge as permissions.
+- Added create permissions that allow you to restrict the *creation* of
+    features (such as bridges and gates). check-create-permissions must
+    be enabled (default not).
+- Bookshelf and apple drops should now occur at the place of the block
+    and not at the player's feet.
+- Updated for the new server update.
+- Caught IOException thrown by the new properties class in hMod.
+
+1.1:
+- Pumpkins can be toggled off and on (between their lit and unlit states) by
+    putting redstone under the pumpkin.
+- Bridges now support redstone. Wire to the sign.
+- Gates now support redstone. Just wire the sign itself.
+- Bridge signs can now be *below* the bridge and out of view.
+- Bridges can now be made out of other blocks (although the entire bridge
+    has to be of one type). Change the list of allowable blocks in
+    CraftBook's properties file.
+- The maximum length of bridges can now be configured.
+- [I] can be used instead of [|] for light switches.
+- You can now do 'grass1:dirt*3,sapling:grass*3' for cauldron
+    configuration (multipliers and item names). Comments can also now
+    start with the sharp (#) sign.
+
+0.4:
+- Added the bridge.
+- Added toggle-able areas.
+- Added chest support to prevent item farming.
+- Apple drop chance can be a decimal number. Now use -1 to disable entirely.
+- Added support for setting permissions for each function so only some
+    groups can use some functions.
+- Fixed sign posts not working for some functions.
+- Added the ability to change the "you pick out a book..." message for the
+    book reading feature.
+
+0.3:
+- b123 (Halloween update) compatible.
+
+0.2:
+- Added the elevator.
+- Added the cauldron.
+- Added apple drops.
+- Added bookshelf drops.
+- Made book reading code able to handle the first and last lines of a file.
+- Made the gate toggle range slightly larger so you can toggle larger gates
+    and you don't have to have the sign up very high.
+
+0.1:
+- Initial release.

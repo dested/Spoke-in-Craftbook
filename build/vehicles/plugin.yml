@@ -1,0 +1,7 @@
+name: CraftBookVehicles
+main: com.sk89q.craftbook.bukkit.VehiclesPlugin
+version: nightly
+commands:
+    st:
+        description: Choose a stop
+        usage: /<command>

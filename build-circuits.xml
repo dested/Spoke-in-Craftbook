@@ -1,0 +1,48 @@
+<project name="CraftBookCircuits" basedir=".">
+
+	<target name="compile">
+		<javac srcdir="${src.dir}/circuits" deprecation="true" includeantruntime="true" destdir="${build.dir}/circuits" debug="true">
+			<classpath>
+				<pathelement location="${build.dir}/common" />
+				<fileset refid="libs" />
+			</classpath>
+		</javac>
+	</target>
+
+	<target name="jar" depends="compile">
+		<mkdir dir="${dist.dir}/circuits" />
+
+		<!-- Make the manifest -->
+		<manifest file="${dist.dir}/circuits/manifest.mf" mode="replace">
+			<attribute name="Implementation-Title" value="CraftBook (circuits)" />
+			<attribute name="Implementation-Version" value="${version}" />
+			<attribute name="CraftBook-Version" value="${version}" />
+			<attribute name="Class-Path" value="CraftBook.jar WorldEdit.jar ../WorldEdit.jar ../gson-1.7.1.jar" />
+		</manifest>
+
+		<!-- Make the plugin.yml file -->
+		<delete file="${build.dir}/circuits/plugin.yml" />
+		<copy tofile="${build.dir}/circuits/plugin.yml" file="${src.dir}/circuits/resources/plugin.yml" />
+		<replace file="${build.dir}/circuits/plugin.yml" token="__VERSION_MACRO__" value="${version}" />
+		<mkdir dir="${build.dir}/circuits/defaults" />
+		<copy tofile="${build.dir}/circuits/defaults/config.yml" file="${src.dir}/circuits/resources/config.yml" />
+		<copy tofile="${build.dir}/circuits/defaults/custom-ics.txt" file="${src.dir}/circuits/resources/custom-ics.txt" />
+		<copy tofile="${build.dir}/circuits/defaults/some.Spoke" file="${src.dir}/circuits/resources/some.Spoke" />
+
+		<copy tofile="${build.dir}/circuits/defaults/Chess.Spoke" file="${src.dir}/circuits/resources/Chess.Spoke" />
+		<copy tofile="${build.dir}/circuits/defaults/tester.spoke" file="${src.dir}/circuits/resources/tester.spoke" />
+
+		<copy tofile="${build.dir}/circuits/defaults/World.html" file="${src.dir}/circuits/resources/World.html" />
+
+
+		<copy tofile="C:/fatty/plugins/CraftBookCircuits/some.Spoke" file="${src.dir}/circuits/resources/some.Spoke" />
+		<copy tofile="C:/fatty/plugins/CraftBookCircuits/WorldGen.Spoke" file="${src.dir}/circuits/resources/WorldGen.Spoke" />
+		<copy tofile="C:/fatty/plugins/CraftBookCircuits/Chess.Spoke" file="${src.dir}/circuits/resources/Chess.Spoke" />
+		<copy tofile="C:/fatty/plugins/CraftBookCircuits/tester.spoke" file="${src.dir}/circuits/resources/tester.spoke" />
+		<copy tofile="C:/fatty/plugins/CraftBookCircuits/World.html" file="${src.dir}/circuits/resources/World.html" />
+
+		<jar jarfile="${dist.dir}/CraftBookCircuits.jar" basedir="${build.dir}/circuits" manifest="${dist.dir}/circuits/manifest.mf" />
+		<copy tofile="C:/fatty/plugins/CraftBookCircuits.jar" file="${dist.dir}/CraftBookCircuits.jar" />
+	</target>
+
+</project>

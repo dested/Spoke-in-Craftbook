@@ -1,0 +1,15 @@
+control-blocks: true
+max-boost-block: 41
+50x-slow-block: 88
+20x-slow-block: 13
+station-block: 49
+reverse-block: 35
+deposit-block: 15
+eject-block: 42
+sort-block: 87
+minecart-dispensers: true
+minecart-decay-time: 0
+minecart-slow-when-empty: false
+minecart-max-speed-modifier: 1
+in-cart-control: true
+hinder-pressure-plate-slow: true

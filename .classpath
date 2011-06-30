@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="oldsrc/commonrefactor"/>
+	<classpathentry kind="src" path="oldsrc/hmod"/>
+	<classpathentry kind="src" path="src/circuits"/>
+	<classpathentry kind="src" path="src/common"/>
+	<classpathentry kind="src" path="src/mechanisms"/>
+	<classpathentry kind="src" path="src/vehicles"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/Dested9/craftbook/lib/Bukkit.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dested9/craftbook/lib/Craftbukkit.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dested9/craftbook/lib/WorldEdit.jar"/>
+	<classpathentry kind="lib" path="lib/gson-1.7.1.jar"/>
+	<classpathentry kind="output" path="src/common"/>
+</classpath>
